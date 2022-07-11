@@ -2,6 +2,7 @@ import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import {Button, Input, Image} from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar'
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
 
@@ -11,6 +12,8 @@ const LoginScreen = () => {
     const signIn = () => {
 
     }
+
+    const navigation = useNavigation()
 
   return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -32,7 +35,8 @@ const LoginScreen = () => {
         </View>
 
         <Button containerStyle={styles.button} onPress={signIn} title="Login"/>
-        <Button containerStyle={styles.button} type="outline" title="Register"/>
+        <Button containerStyle={styles.button} onPress={()=>navigation.navigate('Register')} type="outline" title="Register"/>
+        
         <View style={{height: 100}}/>
 
     </KeyboardAvoidingView>
