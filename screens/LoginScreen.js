@@ -7,11 +7,15 @@ import { auth } from '../firebase';
 
 const LoginScreen = () => {
 
+ 
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     useEffect(() => {
+     
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
+          console.log(authUser?._delegate?.photoURL)
           if (authUser) {
             navigation.replace("Home");
           }
@@ -20,9 +24,11 @@ const LoginScreen = () => {
         return unsubscribe;
       }, []);
 
-    const signIn = () => {
-
-    }
+      const signIn= () => {
+        auth
+          .signInWithEmailAndPassword(email, password)
+          .catch((error) => alert(error));
+      };
 
     const navigation = useNavigation()
 
@@ -41,7 +47,7 @@ const LoginScreen = () => {
         <View style={styles.inputContainer}>
 
             <Input autoFocus value={email} onChangeText={(text)=>setEmail(text)} type="email" placeholder='Email'/>
-            <Input autoFocus value={password} onChangeText={(text)=>setPassword(text)} type="password" secureTextEntry placeholder='Password'/>
+            <Input autoFocus value={password} onChangeText={(text)=>setPassword(text)} type="password" secureTextEntry placeholder='Password' onSubmitEditing={signIn}/>
        
         </View>
 

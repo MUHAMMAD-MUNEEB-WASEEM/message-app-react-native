@@ -10,7 +10,7 @@ const RegisterScreen = ({navigation}) => {
     const [password, setPassword] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
-    const handleRegister = () => {
+    const register = () => {
         auth
           .createUserWithEmailAndPassword(email, password)
           .then((authUser) => {
