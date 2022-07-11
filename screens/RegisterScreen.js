@@ -1,6 +1,7 @@
 import { KeyboardAvoidingView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import {Button, Input, Image} from 'react-native-elements'
+import { auth } from '../firebase';
 
 const RegisterScreen = ({navigation}) => {
 
@@ -9,9 +10,19 @@ const RegisterScreen = ({navigation}) => {
     const [password, setPassword] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
-    const register = () => {
-
-    }
+    const handleRegister = () => {
+        auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((authUser) => {
+            authUser.user.updateProfile({
+              displayName: name,
+              photoURL:
+                imageUrl ||
+                "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+            });
+          })
+          .catch((error) => alert(error.message));
+      };
 
     
   return (
