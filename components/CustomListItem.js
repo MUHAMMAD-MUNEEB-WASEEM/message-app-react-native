@@ -17,11 +17,11 @@ const CustomListItem = ({id, chatName, enterChat}) => {
       <ListItem.Content>
         
         <ListItem.Title style={{ fontWeight: "800" }}>
-          Youtube
+          {chatName}
         </ListItem.Title>
         
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-         This is a short Message
+          Test
         </ListItem.Subtitle>
       
       </ListItem.Content>

@@ -1,18 +1,37 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import CustomListItem from '../components/CustomListItem'
 import { Avatar } from "react-native-elements";
 import { db, auth } from "../firebase";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
+
+  const [chats, setChats] = useState([]);
+
+    const navigation = useNavigation()  
 
   const signOutUser = () => {
     auth.signOut().then(()=>{
       navigation.replace("Login")
     })
   }
+
+  useEffect(() => {
+    const unsubscribe = db.collection('chats').onSnapshot(snapshot => {
+      setChats(
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          data: doc.data()
+        }))
+      );
+    });console.log("unsubscribe" + unsubscribe);
+
+    return unsubscribe;
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,8 +70,10 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <CustomListItem/>
+      <ScrollView style={styles.container}>
+        {chats.map(({id, data: {chatName}})=>(
+            <CustomListItem key={id} id={id} chatName={chatName}/>
+        ))}
       </ScrollView>
     </SafeAreaView>
   )
