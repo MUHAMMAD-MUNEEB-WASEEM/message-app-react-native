@@ -40,6 +40,7 @@ const RegisterScreen = ({navigation}) => {
             type="text"
             value={name}
             onChangeText={(text) => setName(text)}
+            containerStyle={{borderColor: "transparent"}}
             />
 
             <Input
@@ -47,6 +48,7 @@ const RegisterScreen = ({navigation}) => {
             type="email"
             value={email}
             onChangeText={(text) => setEmail(text)}
+            containerStyle={{borderColor: "transparent"}}
             />
 
             <Input
@@ -55,6 +57,7 @@ const RegisterScreen = ({navigation}) => {
             secureTextEntry
             value={password}
             onChangeText={(text) => setPassword(text)}
+            containerStyle={{borderColor: "transparent"}}
             />
 
             <Input
@@ -63,6 +66,7 @@ const RegisterScreen = ({navigation}) => {
             value={imageUrl}
             onChangeText={(text) => setImageUrl(text)}
             onSubmitEditing={register}
+            containerStyle={{borderColor: "transparent"}}
             />
         
         </View>

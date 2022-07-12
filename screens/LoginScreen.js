@@ -4,6 +4,7 @@ import {Button, Input, Image} from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native';
 import { auth } from '../firebase';
+import logo from '../assets/message-logo.png'
 
 const LoginScreen = () => {
 
@@ -38,16 +39,15 @@ const LoginScreen = () => {
 
         <Image 
         
-        source={{
-            uri: "https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png",
-        }}
-        style={{width: 200, height: 200}}
+        source={
+        logo}
+        style={{width: 300, height: 300}}
         />
 
         <View style={styles.inputContainer}>
 
-            <Input autoFocus value={email} onChangeText={(text)=>setEmail(text)} type="email" placeholder='Email'/>
-            <Input autoFocus value={password} onChangeText={(text)=>setPassword(text)} type="password" secureTextEntry placeholder='Password' onSubmitEditing={signIn}/>
+            <Input containerStyle={{border: "none", borderColor: "transparent"}} autoFocus value={email} onChangeText={(text)=>setEmail(text)} type="email" placeholder='Email'/>
+            <Input containerStyle={{borderColor: "transparent"}} autoFocus value={password} onChangeText={(text)=>setPassword(text)} type="password" secureTextEntry placeholder='Password' onSubmitEditing={signIn}/>
        
         </View>
 
